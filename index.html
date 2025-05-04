@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music player</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/03c5e1e5a3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+
+    <div class="music-player">
+        <nav>
+            <div class="circle">
+                <i class="fa-solid fa-angle-left"></i>
+            </div>
+            <div class="circle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+        <img src="https://cdn.shortpixel.ai/spai/q_lossy+w_1051+to_webp+ret_img/www.bizasialive.com/wp-content/uploads/2021/03/raqsebismil001.jpg" alt="song-image" class="song-img">
+        <h1>Raqs-e-Bismil</h1>
+        <p>Imran Ashraf &hearts; Sarah khan</p>
+        <audio id="song">
+            <Source src="media/lIdlmOXs4gJg.128.mp3"  type="audio/mpeg">  
+        </audio>
+        <input type="range" value="0" id="progress"> 
+
+
+        <div class="control">
+            <div><i class="fa-solid fa-backward"></i></div>
+            <div onclick="playPouse()"><i class="fa-solid fa-play"   id="ctrlIcon"></i></div>
+
+            <div><i class="fa-solid fa-forward"></i></div>
+            
+        </div>
+    </div>
+    
+    
+    </div>
+
+
+
+    <script>
+    let progress = document.getElementById("progress");
+  let song = document.getElementById("song");
+  let ctrlIcon = document.getElementById("ctrlIcon");
+
+
+   song.onloadedmetadata = function() {
+    progress.max = song.duration;
+    progress.value = song.currentTime;
+   }
+
+   function playPouse()
+   {
+    if(ctrlIcon.classList.contains("fa-pause")) {
+        song.pause();
+        ctrlIcon.classList.remove("fa-pause");
+        ctrlIcon.classList.add("fa-play");
+    }else {
+        song.play();
+         ctrlIcon.classList.add("fa-pause");
+        ctrlIcon.classList.remove("fa-play");
+    }
+   }
+
+
+   if(song.play()) {
+    setInterval( ()=> {
+        progress.value = song.currentTime;
+    }, 500)
+   }
+
+   progress.onchange = function() {
+    song.play();
+    song.currentTime = progress.value;
+    ctrlIcon.classList.add("fa-pause");
+    ctrlIcon.classList.remove("fa-play");
+   }
+    </script>
+</body>
+</html>
